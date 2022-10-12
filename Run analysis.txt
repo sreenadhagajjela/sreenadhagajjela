@@ -1,0 +1,63 @@
+# 1 Input test and training data
+
+test<- read.table("c:/Users/Molopyane/Documents/datasciencecoursera/Getting and Cleaning Data/Week4/getdata_projectfiles_UCI HAR Dataset/UCI HAR Dataset/test/X_test.txt")
+train<- read.table("c:/Users/Molopyane/Documents/datasciencecoursera/Getting and Cleaning Data/Week4/getdata_projectfiles_UCI HAR Dataset/UCI HAR Dataset/train/X_train.txt")
+
+# Combine datasets
+completedata<- rbind(train,test)
+
+# 2 Input the primary names from txt file
+
+name<- read.table("c:/Users/Molopyane/Documents/datasciencecoursera/Getting and Cleaning Data/Week4/getdata_projectfiles_UCI HAR Dataset/UCI HAR Dataset/features.txt")
+names<- name[2]
+
+
+# 3 Update the column names to descriptive terms
+
+colnames(completedata)<- names[,1]
+colnames(completedata)
+
+
+# 4 Indexes for mean and standard deviation columns
+
+meancols<-data.frame(grep("mean", colnames(completedata) ))
+stdcols <-data.frame(grep("std", colnames(completedata) ))
+
+
+
+# 5 Combine mean and std tables
+# this line places both the mean and std columns into one table, a concern is 
+# the combination gives an integer value that call should only be used for indexing
+# and not for other computation given is calibration
+
+aa<-c(as.numeric(unlist(meancols)), as.numeric(unlist(stdcols)))
+
+# !!!!Reason to avoid use for computation is the resulting composition is that 
+# it give a integer which result in a NULL dimension
+dim(aa)
+
+# 6 Final step provides a subset of the entire data set containing data on the 
+# mean and std for the experimental observations
+
+Primary_Statistcal_Tables<-completedata[,unlist(aa)]
+names(Primary_Statistcal_Tables)
+View(Primary_Statistcal_Tables)
+
+# Export dataset
+write.table(Primary_Statistcal_Tables, file = "Statistical Table.txt", row.names = FALSE)
+getwd() # Identify where the file has been written
+
+# 6.1 Subset containing data for only the mean observations
+
+test_means<- completedata[,unlist(meancols)]
+
+# (OPTIONAL Calculations) The resulting codes create a table for the means for all variables
+
+means1<- colMeans(completedata)
+
+
+# the following code creates a table for the means of the mean and standard 
+# deviation observations
+
+means1<- colMeans(Primary_Statistcal_Tables)
+summary(means1)

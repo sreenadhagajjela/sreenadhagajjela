@@ -1,0 +1,30 @@
+
+Program Variables
+
+aa
+Placeholder containing the positions of the mean and standard deviation columns
+
+completedata
+complete data from the walking measure experiment 
+
+meancols
+positional colunm index of all the mean value observations
+ 
+names  
+Names of the different observations of the Triaxial acceleration from the accelerometer (total acceleration) and the estimated body acceleration and Triaxial Angular velocity from the gyroscope. 
+Primary_Statistcal_Tables
+
+stdcols
+positional colunm index of all the standard deviation value observations
+ 
+test
+Test data set from experiment containing 561 variables and 2947 observations used for model varification
+
+test_means
+subset of the complete dataset made up by the means observations
+
+train
+Subset if the data used for model training containing 561 variables and 7352 approximately 71% of all observations
+
+means1
+mean of all the observations
